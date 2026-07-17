@@ -1,0 +1,5 @@
+ALTER TABLE author
+ADD COLUMN author_id BIGINT GENERATED ALWAYS AS IDENTITY,
+ADD COLUMN firstname varchar(30),
+ADD COLUMN lastname varchar(30),
+ADD COLUMN age INT
