@@ -12,14 +12,17 @@ public class BookService {
     private static final Logger log = LoggerFactory.getLogger(BookService.class);
 
     private final BookRepository bookRepository;
-    private final BookMapper bookMapper;
+    private final AuthorRepository authorRepository;
+    private final BookMapper mapper;
 
-    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
+    public BookService(BookRepository bookRepository, AuthorRepository authorRepository, BookMapper mapper) {
         this.bookRepository = bookRepository;
-        this.bookMapper = bookMapper;
+        this.authorRepository = authorRepository;
+        this.mapper = mapper;
     }
 
     public List<Book> searchAllBooksByFilter(Long authorId, BookSearchFilter filter){
+
         int pageSize = filter.pageSize() != null
                 ? filter.pageSize() : 10;
         int pageNumber = filter.pageNumber() != null
@@ -29,7 +32,11 @@ public class BookService {
                 .ofSize(pageSize)
                 .withPage(pageNumber);
 
-        List<BookEntity> allEntities = repository.searchAllByFilter(
+        if (!authorRepository.existsById(authorId)){
+            throw new IllegalArgumentException("This authorId does not exist. AuthorId = " + authorId);
+        }
+
+        List<BookEntity> allEntities = bookRepository.searchAllByFilter(
                 authorId,
                 pageable
                 );
