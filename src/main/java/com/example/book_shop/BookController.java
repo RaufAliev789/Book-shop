@@ -37,5 +37,14 @@ public class BookController {
                 .body(book);
     }
 
+    @PostMapping("/books/{id}/reserve")
+    public ResponseEntity<Book> reserveBookById(@PathVariable Long id){
+        log.info("The method reserveBookById started");
+        var bookReserve = bookService.reserveBookById(id);
+        log.info("The method reserveBookById finished successfully");
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(bookReserve);
+    }
+
 
 }
