@@ -59,4 +59,19 @@ public class GlobalExceptionHandler {
                 .body(errorDto);
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ErrorResponseDto> handleIllegalState(IllegalStateException e){
+        log.error("Handle 'IllegalStateException' ", e);
+
+        var errorDto = new ErrorResponseDto(
+                "Conflict of book status",
+                e.getMessage(),
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(errorDto);
+    }
+
 }
