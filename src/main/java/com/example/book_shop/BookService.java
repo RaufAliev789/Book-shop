@@ -1,5 +1,6 @@
 package com.example.book_shop;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -46,4 +47,20 @@ public class BookService {
                 .toList();
     }
 
+    public Book reserveBookById(Long id) {
+        var bookEntity = bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Not found book with id = " + id
+                ));
+
+        if (bookEntity.getStatus() != BookStatus.AVAILABLE){
+            throw new IllegalStateException("Cannot reserve book with the status - " + bookEntity.getStatus());
+        }
+
+        bookEntity.setStatus(BookStatus.RESERVED);
+
+        bookRepository.save(bookEntity);
+
+        return mapper.toDomain(bookEntity);
+    }
 }
