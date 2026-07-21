@@ -1,4 +1,4 @@
-package com.example.book_shop;
+package com.example.book_shop.book;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

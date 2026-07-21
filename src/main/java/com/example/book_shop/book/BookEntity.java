@@ -1,5 +1,6 @@
-package com.example.book_shop;
+package com.example.book_shop.book;
 
+import com.example.book_shop.story.StoryEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

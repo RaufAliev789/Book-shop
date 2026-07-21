@@ -1,4 +1,4 @@
-package com.example.book_shop;
+package com.example.book_shop.author;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

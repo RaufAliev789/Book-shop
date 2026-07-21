@@ -1,4 +1,4 @@
-package com.example.book_shop;
+package com.example.book_shop.author;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
@@ -10,11 +10,11 @@ public class AuthorService {
     private static final Logger log = LoggerFactory.getLogger(AuthorService.class);
 
     private final AuthorRepository authorRepository;
-    private final AuthorMapper mapper;
+    private final AuthorMapper authorMapper;
 
-    public AuthorService(AuthorRepository authorRepository, AuthorMapper mapper) {
+    public AuthorService(AuthorRepository authorRepository, AuthorMapper authorMapper) {
         this.authorRepository = authorRepository;
-        this.mapper = mapper;
+        this.authorMapper = authorMapper;
     }
 
     public Author getInfoOfAuthorById(Long id) {
@@ -23,6 +23,6 @@ public class AuthorService {
                         "Not found author by id = " + id
                 ));
 
-        return mapper.toDomain(authorEntity);
+        return authorMapper.toDomain(authorEntity);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.book_shop;
+package com.example.book_shop.author;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;

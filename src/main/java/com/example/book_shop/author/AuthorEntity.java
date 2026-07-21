@@ -1,10 +1,9 @@
-package com.example.book_shop;
+package com.example.book_shop.author;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 @Data

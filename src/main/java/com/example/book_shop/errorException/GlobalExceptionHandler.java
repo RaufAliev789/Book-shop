@@ -1,4 +1,4 @@
-package com.example.book_shop;
+package com.example.book_shop.errorException;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
@@ -14,18 +14,18 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponseDto> handleException(Exception e){
-        log.error("Handle 'Exception' ", e);
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponseDto> handleIllegalArgument(IllegalArgumentException e){
+        log.error("Handle 'IllegalArgumentException' ", e);
 
         var errorDto = new ErrorResponseDto(
-                "Handle 'Internal Server Exception' ",
+                "Bad request",
                 e.getMessage(),
                 LocalDateTime.now()
         );
 
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(errorDto);
     }
 
@@ -44,20 +44,6 @@ public class GlobalExceptionHandler {
                 .body(errorDto);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponseDto> handleIllegalArgument(IllegalArgumentException e){
-        log.error("Handle 'IllegalArgumentException' ", e);
-
-        var errorDto = new ErrorResponseDto(
-                "Bad request",
-                e.getMessage(),
-                LocalDateTime.now()
-        );
-
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(errorDto);
-    }
 
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<ErrorResponseDto> handleIllegalState(IllegalStateException e){
@@ -71,6 +57,21 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
+                .body(errorDto);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDto> handleException(Exception e){
+        log.error("Handle 'Exception' ", e);
+
+        var errorDto = new ErrorResponseDto(
+                "Handle 'Internal Server Exception' ",
+                e.getMessage(),
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(errorDto);
     }
 

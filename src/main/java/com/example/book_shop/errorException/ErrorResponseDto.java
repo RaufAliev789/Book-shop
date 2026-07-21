@@ -1,4 +1,4 @@
-package com.example.book_shop;
+package com.example.book_shop.errorException;
 
 import java.time.LocalDateTime;
 

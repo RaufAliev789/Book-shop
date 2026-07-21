@@ -1,5 +1,5 @@
-package com.example.book_shop;
-
+package com.example.book_shop.book;
+import com.example.book_shop.author.AuthorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,12 +14,12 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
-    private final BookMapper mapper;
+    private final BookMapper bookMapper;
 
-    public BookService(BookRepository bookRepository, AuthorRepository authorRepository, BookMapper mapper) {
+    public BookService(BookRepository bookRepository, AuthorRepository authorRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
-        this.mapper = mapper;
+        this.bookMapper = bookMapper;
     }
 
     public List<Book> searchAllBooksByFilter(Long authorId, BookSearchFilter filter){
@@ -34,7 +34,7 @@ public class BookService {
                 .withPage(pageNumber);
 
         if (!authorRepository.existsById(authorId)){
-            throw new IllegalArgumentException("This authorId does not exist. AuthorId = " + authorId);
+            throw new EntityNotFoundException("This authorId does not exist. AuthorId = " + authorId);
         }
 
         List<BookEntity> allEntities = bookRepository.searchAllByFilter(
@@ -43,7 +43,7 @@ public class BookService {
                 );
 
         return allEntities.stream()
-                .map(mapper :: toDomain)
+                .map(bookMapper :: toDomain)
                 .toList();
     }
 
@@ -61,6 +61,6 @@ public class BookService {
 
         bookRepository.save(bookEntity);
 
-        return mapper.toDomain(bookEntity);
+        return bookMapper.toDomain(bookEntity);
     }
 }

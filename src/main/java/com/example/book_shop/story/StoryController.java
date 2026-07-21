@@ -1,5 +1,6 @@
-package com.example.book_shop;
+package com.example.book_shop.story;
 
+import com.example.book_shop.book.BookController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
