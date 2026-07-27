@@ -34,7 +34,7 @@ public class BookService {
                 .withPage(pageNumber);
 
         if (!authorRepository.existsById(authorId)){
-            throw new EntityNotFoundException("This authorId does not exist. AuthorId = " + authorId);
+            throw new EntityNotFoundException("Not found author by id = " + authorId);
         }
 
         List<BookEntity> allEntities = bookRepository.searchAllByFilter(

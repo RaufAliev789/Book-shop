@@ -1,0 +1,6 @@
+ALTER TABLE book
+	ADD CONSTRAINT unique_book_isbn UNIQUE (isbn),
+	ALTER COLUMN publisher SET NOT NULL,
+	ALTER COLUMN year_release SET NOT NULL,
+	ALTER COLUMN price SET NOT NULL,
+	ALTER COLUMN status SET NOT NULL;
