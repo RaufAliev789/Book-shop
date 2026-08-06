@@ -63,8 +63,6 @@ public class BookService {
 
         bookEntity.setStatus(BookStatus.RESERVED);
 
-        bookRepository.save(bookEntity);
-
         return bookMapper.toDomain(bookEntity);
     }
 }
