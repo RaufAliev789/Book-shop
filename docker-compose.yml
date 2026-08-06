@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: book-shop-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-postgres}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-root}
+    ports:
+      - "5432:5432"
+    volumes:
+      - book-shop-pgdata:/var/lib/postgresql/data
+
+volumes:
+  book-shop-pgdata:
