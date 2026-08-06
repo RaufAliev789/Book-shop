@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -47,13 +48,16 @@ public class BookService {
                 .toList();
     }
 
+    @Transactional
     public Book reserveBookById(Long id) {
         var bookEntity = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Not found book with id = " + id
                 ));
 
-        if (bookEntity.getStatus() != BookStatus.AVAILABLE){
+        int updated = bookRepository.updateStatusIfCurrent(id, BookStatus.AVAILABLE, BookStatus.RESERVED);
+
+        if (updated == 0) {
             throw new IllegalStateException("Cannot reserve book with the status - " + bookEntity.getStatus());
         }
 
