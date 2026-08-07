@@ -15,15 +15,23 @@ Backend для онлайн-книжного магазина: авторы, п�
 
 ## Запуск локально
 
-Требуется Java 21+ и запущенный PostgreSQL.
+Требуется Java 21+ и Docker (для PostgreSQL).
 
-1. Создать БД `postgres` (или поменять `spring.datasource.*` в `application.properties` под свою).
-2. Запустить:
-```
-   ./mvnw spring-boot:run
-```
+1. Поднять БД:
+
+docker compose up -d
+
+Поднимет PostgreSQL на `localhost:5432` (база `postgres`, пользователь `postgres`, пароль `root` — дефолты, которые можно переопределить через переменные окружения `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`).
+
+2. Запустить приложение:
+
+./mvnw spring-boot:run
+
 Приложение поднимется на `http://localhost:8080`.
 
+## Документация API
+
+После запуска доступна по адресу `http://localhost:8080/swagger-ui.html` — интерактивная документация с возможностью тестового вызова эндпоинтов прямо из браузера. JSON-спецификация — `http://localhost:8080/v3/api-docs`.
 ## API
 
 ### Получить автора по ID
