@@ -20,7 +20,7 @@ public class BookMapper {
     public BookEntity toEntity(Book book){
         return new BookEntity(
                 book.getBookId(),
-                book.getStoryId() != null ? new StoryEntity(book.getBookId()) : null, //конструктор в родителе
+                book.getStoryId() != null ? new StoryEntity(book.getStoryId()) : null, //конструктор в родителе
                 book.getISBN(),
                 book.getPublisher(),
                 book.getYear(),
