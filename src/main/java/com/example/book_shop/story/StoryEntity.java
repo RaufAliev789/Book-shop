@@ -21,7 +21,7 @@ public class StoryEntity {
     @JoinColumn(name = "author_id")
     private AuthorEntity author;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
     public StoryEntity(Long storyId){

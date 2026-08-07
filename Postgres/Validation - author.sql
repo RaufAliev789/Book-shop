@@ -1,5 +1,0 @@
-ALTER TABLE author
-	ALTER COLUMN firstname SET NOT NULL,
-	ALTER COLUMN lastname SET NOT NULL,
-	ALTER COLUMN birthday SET NOT NULL;
-	

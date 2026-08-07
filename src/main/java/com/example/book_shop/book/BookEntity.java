@@ -23,16 +23,16 @@ public class BookEntity {
     @JoinColumn(name = "story_id")
     private StoryEntity story;
 
-    @Column(name = "isbn")
+    @Column(name = "isbn", nullable = false)
     private String ISBN;
 
-    @Column(name = "publisher")
+    @Column(name = "publisher", nullable = false)
     private String publisher;
 
-    @Column(name = "year_release")
+    @Column(name = "year_release", nullable = false)
     private Year year;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private int price;
 
     @Enumerated(EnumType.STRING)
